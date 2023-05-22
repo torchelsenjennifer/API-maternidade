@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/conecta.js";
 
-export const Baby = sequelize.define("baby", {
+export const Mother = sequelize.define("mother", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -24,18 +24,3 @@ export const Baby = sequelize.define("baby", {
     allowNull: false,
   },
 });
-
-//Um bebe pertence a uma mãe
-Baby.belongsTo(Mother, {
-	foreignKey: {
-	  name: "bebe_id",
-	  allowNull: false,
-	  onDelete: "RESTRICT",
-	  onUpdate: "CASCADE",
-	},
-  });
-
-//Uma mae pode ter muitos bebes
-Mother.hasMany(Baby, {
-	foreignKey: "bebe_id",
-  });

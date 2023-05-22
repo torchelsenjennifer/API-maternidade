@@ -2,6 +2,9 @@ import express from "express";
 import { sequelize } from "./databases/conecta.js";
 import cors from "cors";
 import routes from "./routes.js";
+import { Baby } from "./models/Baby.js";
+import { Mother } from "./models/Mother.js";
+import { Doctor } from "./models/Doctor.js";
 
 const app = express();
 const port = 3000;
@@ -14,7 +17,11 @@ async function conecta_db() {
   try {
     await sequelize.authenticate();
     console.log("Conexão com Banco de dados Realizada com sucesso");
+	await Mother.sync()
+	await Doctor.sync()
+	await Baby.sync();
   } catch (erro) {
+	console.log(erro);
     console.error("Erro na conexão com o banco");
   }
 }
