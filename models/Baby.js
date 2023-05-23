@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../databases/conecta.js";
-import { Mother } from "./Mother.js"
+import { Mother } from "./Mother.js";
 import { Doctor } from "./Doctor.js";
 
 export const Baby = sequelize.define("baby", {
@@ -8,6 +8,10 @@ export const Baby = sequelize.define("baby", {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
+  },
+  nome: {
+    type: DataTypes.STRING(30),
+    allowNull: false,
   },
   data: {
     type: DataTypes.DATE,
@@ -28,9 +32,9 @@ Baby.belongsTo(Mother, {
   foreignKey: {
     name: "mae_id",
     allowNull: false,
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
   },
+  onDelete: "RESTRICT",
+  onUpdate: "CASCADE",
 });
 
 //Uma mae pode ter muitos bebes
@@ -43,9 +47,9 @@ Baby.belongsTo(Doctor, {
   foreignKey: {
     name: "medico_id",
     allowNull: false,
-    onDelete: "RESTRICT",
-    onUpdate: "CASCADE",
   },
+  onDelete: "RESTRICT",
+  onUpdate: "CASCADE",
 });
 
 // um medico atende varios bebes

@@ -17,6 +17,8 @@ async function conecta_db() {
   try {
     await sequelize.authenticate();
     console.log("Conexão com Banco de dados Realizada com sucesso");
+	//await sequelize.sync({alter:true}); -> Verifica se ha alterações e atualiza as tabelas se houver
+	//await sequelize.sync({force:true}); -> recria as tabelas, mesmo se já existirem
 	await Mother.sync()
 	await Doctor.sync()
 	await Baby.sync();
